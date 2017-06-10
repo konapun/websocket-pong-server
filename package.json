@@ -1,0 +1,35 @@
+{
+  "name": "ultimate-pong",
+  "version": "1.0.0",
+  "description": "Pong using websockets",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon bin/dev",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && mkdir dist && babel server -s -d dist",
+    "production": "npm run build && nodemon bin/production"
+  },
+  "author": "Bremen Braun (konapun)",
+  "license": "MIT",
+  "dependencies": {
+    "cached": "^4.3.0",
+    "express": "^4.15.2",
+    "redis": "^2.7.1",
+    "socket.io": "^2.0.1",
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "body-parser": "^1.17.1",
+    "dotenv": "^4.0.0",
+    "nodemon": "^1.11.0"
+  }
+}
