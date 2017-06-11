@@ -24,7 +24,8 @@ function getGameRoutes (router, db) {
   router.get('/game', gc.list)
   router.post('/game', gc.create)
   router.get('/game/:id', gc.get)
-
+  router.get('/game/join', gc.joinAny)
+  router.get('/game/join/:id', gc.joinById)
   return router
 }
 

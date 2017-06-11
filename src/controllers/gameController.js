@@ -7,15 +7,7 @@ function gameController (db) {
 
   return {
     create (req, res) {
-      // const userId = req.params.userId
-
-      // let user =
-      let game = games.insert({
-        id: id++,
-        players: []
-      })
-
-      res.send(game)
+      res.send(_createGame())
     },
 
     list (req, res) {
@@ -25,7 +17,42 @@ function gameController (db) {
     get (req, res) {
       const id = req.params.id
       res.send(games.get(id))
+    },
+
+    joinAny (req, res) {
+      let joinable = _getJoinableGames()
+      if (!joinable) {
+        joinable = [ _createGame() ]
+      }
+      return _joinById(joinable[0])
+    },
+
+    joinById (req, res) {
+      const id = req.params.id
+      console.log('Joining game by id', id)
+      res.send(_joinById(id))
     }
+
+  }
+
+  function _createGame () {
+    // const userId = req.params.userId
+
+    // let user =
+    let game = games.insert({
+      id: id++,
+      players: []
+    })
+
+    return game
+  }
+
+  function _getJoinableGames () {
+    return games.where(obj => obj.players.length < 2)
+  }
+
+  function _joinById (id) {
+
   }
 }
 
