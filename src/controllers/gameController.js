@@ -1,15 +1,30 @@
 function gameController (db) {
+  let id = 1
+  const games = db.addCollection('games', {
+    unique: [ 'id' ],
+    indices: [ 'id' ]
+  })
+
   return {
     create (req, res) {
-      console.log('Creating game')
+      // const userId = req.params.userId
+
+      // let user =
+      let game = games.insert({
+        id: id++,
+        players: []
+      })
+
+      res.send(game)
     },
 
     list (req, res) {
-      console.log('Listing games')
+      res.send(games.find({ id: { '$ne': null } }))
     },
 
-    join (req, res) {
-      console.log('Joining game', req.params.id)
+    get (req, res) {
+      const id = req.params.id
+      res.send(games.get(id))
     }
   }
 }
