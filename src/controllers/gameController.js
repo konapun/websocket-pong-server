@@ -1,10 +1,16 @@
-const gameController = {
-  list (req, res) {
-    console.log('Listing games!')
-  },
+function gameController (db) {
+  return {
+    create (req, res) {
+      console.log('Creating game')
+    },
 
-  join (req, res) {
-    console.log('Joining game', req.params.id)
+    list (req, res) {
+      console.log('Listing games')
+    },
+
+    join (req, res) {
+      console.log('Joining game', req.params.id)
+    }
   }
 }
 
