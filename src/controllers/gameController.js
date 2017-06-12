@@ -1,17 +1,15 @@
+import gamesModel from '../models/games'
+
 function gameController (db) {
-  let id = 1
-  const games = db.addCollection('games', {
-    unique: [ 'id' ],
-    indices: [ 'id' ]
-  })
+  const games = gamesModel(db)
 
   return {
     create (req, res) {
-      res.send(_createGame())
+      res.send(games.create())
     },
 
     list (req, res) {
-      res.send(games.find({ id: { '$ne': null } }))
+      res.send(games.list())
     },
 
     get (req, res) {
@@ -20,9 +18,9 @@ function gameController (db) {
     },
 
     joinAny (req, res) {
-      let joinable = _getJoinableGames()
+      let joinable = games.getJoinableGames()
       if (!joinable) {
-        joinable = [ _createGame() ]
+        joinable = [ games.create() ]
       }
       return _joinById(joinable[0])
     },
@@ -35,24 +33,8 @@ function gameController (db) {
 
   }
 
-  function _createGame () {
-    // const userId = req.params.userId
-
-    // let user =
-    let game = games.insert({
-      id: id++,
-      players: []
-    })
-
-    return game
-  }
-
-  function _getJoinableGames () {
-    return games.where(obj => obj.players.length < 2)
-  }
-
   function _joinById (id) {
-
+    return {} // FIXME - replace with model operation
   }
 }
 

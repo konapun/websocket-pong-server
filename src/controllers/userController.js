@@ -1,24 +1,16 @@
+import usersModel from '../models/users'
+
 function userController (db) {
-  let id = 1
-  const users = db.addCollection('users', {
-    unique: [ 'id' ],
-    indices: [ 'id' ]
-  })
+  const users = usersModel(db)
 
   return {
     create (req, res) {
-      const params = req.params
-
-      let user = users.insert({
-        id: id++,
-        username: params.username
-      })
-
-      res.send(user)
+      const { username } = req.params
+      res.send(users.create(username))
     },
 
     list (req, res) {
-      res.send(users.find({ id: { '$ne': null } }))
+      res.send(users.list())
     },
 
     get (req, res) {
